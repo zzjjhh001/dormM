@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .test{
+            height: 200px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">ppp</button>
+    <div class="test"></div>
+    <div class="test"></div>
+    <div class="test"></div>
+    <div class="test"></div>
+    <div class="test"></div>
+    <p id="top">wwww</p>
+</body>
+<script>
+    var EventUtil = {
+            addHandler: function(element, type, handler) {
+                //绑定事件
+                //Chrome Firefox IE9等     addEventListener 
+                //IE8及IE8以下的浏览器     attachEvent 
+                if(element.addEventListener) {
+                    element.addEventListener(type, handler, false);
+                } else if(element.attachEvent) {
+                    element.attachEvent("on" + type, handler);
+                } else {
+                    element["on" + type] = handler
+                }
+            },
+            removeHandler: function(element, type, handler) {
+                //移除事件
+                //Chrome Firefox IE9等      
+                //IE8及IE8以下的浏览器     
+                if(element.removeEventListener) {
+                    element.removeEventListener(type, handler, false);
+                } else if(element.detachEvent) {
+                    element.detachEvent("on" + type, handler);
+                } else {
+                    element["on" + type] = handler
+                }
+            },
+            getTarget: function(event) {
+                return event.target || event.srcElement;
+            },
+            preventDefault: function(event) {
+                if(event.preventDefault) {
+                    event.preventDefault();
+                } else {
+                    event.returnValue = false;
+                }
+            },
+            stopPropagation: function(event) {
+                if(event.stopPropagation) {
+                    event.stopPropagation()
+                } else {
+                    event.cancelBubble = true;
+                }
+            }
+        }
+        debugger;
+        var btn =document.getElementById("btn");
+        EventUtil.addHandler(btn , "click" ,function(e){
+            console.log(navigator.userAgent);
+            debugger;
+        });
+        
+</script>
+</html>
